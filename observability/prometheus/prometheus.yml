@@ -1,0 +1,78 @@
+global:
+  scrape_interval: 1s
+
+scrape_configs:
+  - job_name: 'io_blocking'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets:
+          - 'observability-blocking-io:8080'
+        labels:
+          example: 'io-blocking'
+
+  - job_name: 'cpu_blocking'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets:
+          - 'observability-blocking-cpu:8080'
+        labels:
+          example: 'cpu-blocking'
+
+  - job_name: 'realistic_blocking'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets:
+          - 'observability-blocking-real:8080'
+        labels:
+          example: 'real-blocking'
+
+  - job_name: 'realistic_single_thread'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets:
+          - 'observability-real-single:8080'
+        labels:
+          example: 'real-single'
+
+  - job_name: 'realistic_multi_thread'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets:
+          - 'observability-real-multi:8080'
+        labels:
+          example: 'real-multi'
+
+
+  - job_name: 'multi_horizontal'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 1s
+    static_configs:
+      - targets:
+          - 'observability-multi-horizontal-0:8080'
+          - 'observability-multi-horizontal-1:8080'
+          - 'observability-multi-horizontal-2:8080'
+          - 'observability-multi-horizontal-3:8080'
+          - 'observability-multi-horizontal-4:8080'
+          - 'observability-multi-horizontal-5:8080'
+          - 'observability-multi-horizontal-6:8080'
+          - 'observability-multi-horizontal-7:8080'
+          - 'observability-multi-horizontal-8:8080'
+          - 'observability-multi-horizontal-9:8080'
+          - 'observability-multi-horizontal-10:8080'
+          - 'observability-multi-horizontal-11:8080'
+          - 'observability-multi-horizontal-12:8080'
+          - 'observability-multi-horizontal-13:8080'
+          - 'observability-multi-horizontal-14:8080'
+          - 'observability-multi-horizontal-15:8080'
+          - 'observability-multi-horizontal-16:8080'
+          - 'observability-multi-horizontal-17:8080'
+          - 'observability-multi-horizontal-18:8080'
+          - 'observability-multi-horizontal-19:8080'
+          - 'observability-multi-horizontal-20:8080'
+        labels:
+          example: 'multi-horizontal'

@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: 'scaling_prometheus'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+
+  grafana:
+    image: grafana/grafana
+    container_name: 'scaling_grafana'
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - '3000:3000'
+
+  blocking-io:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-blocking-io
+    environment:
+      BLOCKING: "io"
+      MAX_BLOCK: 100
+      MIN_BLOCK: 10
+
+      THREADING: "single"
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+
+  blocking-cpu:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-blocking-cpu
+    environment:
+      BLOCKING: "cpu"
+      MAX_BLOCK: 100
+      MIN_BLOCK: 10
+
+      THREADING: "single"
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+
+  blocking-real:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-blocking-real
+    environment:
+      BLOCKING: "real"
+      MAX_BLOCK: 20
+      MIN_BLOCK: 1
+
+      THREADING: "single"
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 1

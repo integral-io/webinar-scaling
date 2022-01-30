@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: 'scaling_prometheus'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+
+  grafana:
+    image: grafana/grafana
+    container_name: 'scaling_grafana'
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - '3000:3000'
+
+  real-single:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-real-single
+    environment:
+      BLOCKING: "real"
+      MAX_BLOCK: 10
+      MIN_BLOCK: 1
+
+      THREADING: "single"
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+
+  real-multi:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-real-multi
+    environment:
+      BLOCKING: "real"
+      MAX_BLOCK: 10
+      MIN_BLOCK: 1
+
+      THREADING: "queue"
+      THREADS: 10
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 1
