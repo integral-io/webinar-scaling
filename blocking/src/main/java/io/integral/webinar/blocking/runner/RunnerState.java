@@ -1,14 +1,14 @@
-package io.integral.webinar.blocking.runners;
+package io.integral.webinar.blocking.runner;
 
 import lombok.Getter;
 
-public enum State {
+public enum RunnerState {
     ON(true), OFF(false);
 
     @Getter
     private final boolean running;
 
-    State(Boolean running) {
+    RunnerState(Boolean running) {
         this.running = running;
     }
 }

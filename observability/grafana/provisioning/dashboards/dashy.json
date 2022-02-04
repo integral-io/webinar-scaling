@@ -21,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -102,11 +101,11 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(loop_timer_seconds_count[1m])",
-          "hide": true,
+          "expr": "sum(rate(loop_timer_seconds_count{blocking=\"threaded\"}[1m]))",
+          "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "{{job}}-{{blocking}}",
+          "legendFormat": "total-multi-threaded",
           "refId": "A"
         },
         {
@@ -115,11 +114,24 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(rate(loop_timer_seconds_count[1m])) by (blocking)",
+          "expr": "sum(rate(loop_timer_seconds_count{blocking=\"single.nonblock.io\"}[1m]))",
           "hide": false,
           "instant": false,
           "interval": "",
-          "legendFormat": "{{blocking}}",
+          "legendFormat": "total-single-threaded",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(rate(loop_timer_seconds_count{blocking!=\"nonblock.io\"}[1m])) by (blocking, instance)",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{instance}}-{{blocking}}",
           "refId": "C"
         }
       ],
@@ -316,6 +328,214 @@
       ],
       "title": "CPU Usage",
       "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 22,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "jvm_threads_states_threads{state=\"timed-waiting\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - {{state}}",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "jvm_threads_states_threads{state=\"runnable\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{instance}} - {{state}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Threads per instance",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbits"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "jvm_memory_committed_bytes{id=\"Eden Space\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{area}}-{{instance}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "jvm_memory_committed_bytes{id=\"G1 Eden Space\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "{{area}}-{{instance}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "jvm_memory_committed_bytes",
+          "hide": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "title": "Memory Usage",
+      "type": "timeseries"
     }
   ],
   "refresh": "5s",
@@ -333,6 +553,6 @@
   "timezone": "",
   "title": "Blocking",
   "uid": "xaCJaPx7k",
-  "version": 32,
+  "version": 1,
   "weekStart": ""
 }

@@ -1,10 +1,10 @@
 global:
-  scrape_interval: 1s
+  scrape_interval: 5s
 
 scrape_configs:
   - job_name: 'io_blocking'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 1s
+    scrape_interval: 5s
     static_configs:
       - targets:
           - 'observability-blocking-io:8080'
@@ -13,7 +13,7 @@ scrape_configs:
 
   - job_name: 'cpu_blocking'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 1s
+    scrape_interval: 5s
     static_configs:
       - targets:
           - 'observability-blocking-cpu:8080'
@@ -22,16 +22,35 @@ scrape_configs:
 
   - job_name: 'realistic_blocking'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 1s
+    scrape_interval: 5s
     static_configs:
       - targets:
           - 'observability-blocking-real:8080'
         labels:
           example: 'real-blocking'
 
+  - job_name: 'io_non_blocking'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+          - 'observability-non-blocking-io:8080'
+        labels:
+          example: 'io-non-blocking'
+
+  - job_name: 'ideal_single'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+          - 'observability-better-single:8080'
+          - 'observability-ideal-single:8080'
+        labels:
+          example: 'ideal-single'
+
   - job_name: 'realistic_single_thread'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 1s
+    scrape_interval: 5s
     static_configs:
       - targets:
           - 'observability-real-single:8080'
@@ -40,7 +59,7 @@ scrape_configs:
 
   - job_name: 'realistic_multi_thread'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 1s
+    scrape_interval: 5s
     static_configs:
       - targets:
           - 'observability-real-multi:8080'
@@ -50,7 +69,7 @@ scrape_configs:
 
   - job_name: 'multi_horizontal'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 1s
+    scrape_interval: 5s
     static_configs:
       - targets:
           - 'observability-multi-horizontal-0:8080'

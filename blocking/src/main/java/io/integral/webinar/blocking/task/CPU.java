@@ -1,34 +1,29 @@
-package io.integral.webinar.blocking.types;
+package io.integral.webinar.blocking.task;
 
+import io.integral.webinar.blocking.BlockingTask;
 import io.micrometer.core.instrument.Timer;
-import lombok.Setter;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
-import static io.integral.webinar.blocking.types.BlockingMetrics.*;
-import static java.time.Duration.ofMillis;
-import static java.time.Instant.*;
+import static io.integral.webinar.blocking.observability.DemoMetrics.getRandom;
+import static io.integral.webinar.blocking.observability.DemoMetrics.getTimer;
+import static io.integral.webinar.blocking.task.TaskState.*;
+import static java.time.Duration.ofNanos;
+import static java.time.Instant.now;
 
 @Slf4j
-@Component
-@Profile("cpu")
 public class CPU implements BlockingTask {
 
     public final Timer timer;
 
     public final Integer maxBlock;
     private final Integer minBlock;
+    @Getter
+    private TaskState taskState = CREATED;
 
-    @Setter
-    private String resource = "initialized";
-
-    public CPU(@Value("${MAX_BLOCK:1000}") Integer maxBlock,
-               @Value("${MIN_BLOCK:100}") Integer minBlock
-    ) {
+    public CPU(Integer maxBlock, Integer minBlock) {
         this.maxBlock = maxBlock;
         this.minBlock = minBlock;
         this.timer =  getTimer("cpu");
@@ -41,7 +36,7 @@ public class CPU implements BlockingTask {
 
     @Override
     public String getLogStatement() {
-        return "resources for task " + resource + ": performing CPU blocking with busy loop";
+        return "Simulating CPU blocking with busy loop";
     }
 
     @Override
@@ -50,9 +45,11 @@ public class CPU implements BlockingTask {
     }
 
     private void simulateIOBlocking() {
-        Instant future = now().plus(ofMillis(getRandom(minBlock, maxBlock)));
+        taskState = RUNNING;
+        Instant future = now().plus(ofNanos(getRandom(minBlock, maxBlock) * 1000L));
         while (future.isAfter(now())) {
             log.trace("A watched pot never boils");
         }
+        taskState = COMPLETE;
     }
 }

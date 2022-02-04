@@ -1,32 +1,33 @@
-package io.integral.webinar.blocking.types;
+package io.integral.webinar.blocking.task;
 
+import io.integral.webinar.blocking.BlockingTask;
+import io.integral.webinar.blocking.observability.DemoMetrics;
 import io.micrometer.core.instrument.Timer;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
+import static io.integral.webinar.blocking.task.TaskState.*;
+
 @Slf4j
-@Component
-@Profile("io")
 public class IO implements BlockingTask {
 
     public final Timer timer;
 
     public final Integer maxBlock;
     private final Integer minBlock;
+    @Getter
+    private TaskState taskState = CREATED;
 
     @Setter
     private String resource = "initialized";
 
-    public IO(@Value("${MAX_BLOCK:1000}") Integer maxBlock,
-              @Value("${MIN_BLOCK:100}") Integer minBlock) {
+    public IO(Integer maxBlock, Integer minBlock) {
         this.maxBlock = maxBlock;
         this.minBlock = minBlock;
-        this.timer =  BlockingMetrics.getTimer("io");
+        this.timer =  DemoMetrics.getTimer("io");
     }
 
     @Override
@@ -45,10 +46,15 @@ public class IO implements BlockingTask {
     }
 
     private void simulateIOBlocking() {
+        taskState = RUNNING;
         try {
-            TimeUnit.MILLISECONDS.sleep(BlockingMetrics.getRandom(minBlock, maxBlock));
+            taskState = WAITING;
+            TimeUnit.MILLISECONDS.sleep(DemoMetrics.getRandom(minBlock, maxBlock));
+            taskState = RUNNING;
         } catch (InterruptedException e) {
+            taskState = RUNNING;
             log.warn(e.getMessage(), e);
         }
+        taskState = COMPLETE;
     }
 }

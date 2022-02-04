@@ -18,157 +18,65 @@ services:
     ports:
       - '3000:3000'
 
-  multi-0:
+  multi-0: # (c1;T1)(c1;T2)(c1;T10)(c1:T20)
     image: blocking:1.0-SNAPSHOT
     container_name: observability-multi-horizontal-0
     environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 100 # 10 millis
+      IO_MIN_BLOCK: 10  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 10000 # 10 millis
+      CPU_MIN_BLOCK: 1000  # 1 milli
 
-      THREADING: "queue"
-      THREADS: 400
+      THREADING: "multi"
+      THREADS: 20
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
   multi-1:
     image: blocking:1.0-SNAPSHOT
     container_name: observability-multi-horizontal-1
     environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 100 # 10 millis
+      IO_MIN_BLOCK: 10  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 10000 # 10 millis
+      CPU_MIN_BLOCK: 1000  # 1 milli
 
-      THREADING: "queue"
-      THREADS: 400
+      THREADING: "multi"
+      THREADS: 20
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
   multi-2:
     image: blocking:1.0-SNAPSHOT
     container_name: observability-multi-horizontal-2
     environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 100 # 10 millis
+      IO_MIN_BLOCK: 10  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 10000 # 10 millis
+      CPU_MIN_BLOCK: 1000  # 1 milli
 
-      THREADING: "queue"
-      THREADS: 400
+      THREADING: "multi"
+      THREADS: 20
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
-
-
-  multi-3:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-multi-horizontal-3
-    environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
-
-      THREADING: "queue"
-      THREADS: 400
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 4
-
-  multi-4:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-multi-horizontal-4
-    environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
-
-      THREADING: "queue"
-      THREADS: 400
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 4
-
-  multi-5:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-multi-horizontal-5
-    environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
-
-      THREADING: "queue"
-      THREADS: 400
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 4
-
-  multi-6:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-multi-horizontal-6
-    environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
-
-      THREADING: "queue"
-      THREADS: 400
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 4
-
-
-  multi-7:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-multi-horizontal-7
-    environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
-
-      THREADING: "queue"
-      THREADS: 400
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 4
-
-  multi-8:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-multi-horizontal-8
-    environment:
-      BLOCKING: "real"
-      MAX_BLOCK: 1
-      MIN_BLOCK: 0
-
-      THREADING: "queue"
-      THREADS: 400
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 4
+          cpus: 1

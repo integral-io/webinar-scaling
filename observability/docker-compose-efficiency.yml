@@ -1,0 +1,336 @@
+version: '3.7'
+
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: 'scaling_prometheus'
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+
+  grafana:
+    image: grafana/grafana
+    container_name: 'scaling_grafana'
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+      - '3000:3000'
+
+  multi-0:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-0
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+
+  multi-1:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-1
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+
+  multi-2:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-2
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1 # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+
+
+  multi-3:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-3
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1 # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+
+  multi-4:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-4
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1 # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 4
+
+  multi-5:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-5
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-6:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-6
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+
+  multi-7:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-7
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-8:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-8
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-9:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-9
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-10:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-10
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-11:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-11
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-12:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-12
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-13:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-13
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
+
+  multi-14:
+    image: blocking:1.0-SNAPSHOT
+    container_name: observability-multi-horizontal-14
+    environment:
+      BLOCKING: "ideal"
+      # IO blocking is in units of Millis
+      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MIN_BLOCK: 1  # 1 milli
+      # CPU blocking is in units of Micros
+      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MIN_BLOCK: 1  # .75 milli
+
+      THREADING: "multi"
+      THREADS: 250
+    expose:
+      - 8080
+    deploy:
+      resources:
+        limits:
+          cpus: 3
