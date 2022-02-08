@@ -1,6 +1,6 @@
 package io.integral.webinar.blocking.runner;
 
-import io.integral.webinar.blocking.NonBlockingTask;
+import io.integral.webinar.blocking.BlockingTask;
 import io.integral.webinar.blocking.Runner;
 import io.integral.webinar.blocking.observability.DemoMetrics;
 import io.integral.webinar.blocking.runner.service.Consumer;
@@ -23,14 +23,14 @@ import static java.util.concurrent.Executors.newScheduledThreadPool;
 
 @Slf4j
 @Component
-@Profile({"multi & ideal"})
-public class MultiThreadedRunner implements Runner<NonBlockingTask> {
+@Profile({"multi & ideal", "multi & real"})
+public class MultiThreadedRunner implements Runner<BlockingTask> {
 
 
-  private final TicketedExecutor<NonBlockingTask> executor;
-  private final Consumer<NonBlockingTask> consumer;
-  private final Producer<NonBlockingTask> producer;;
-  private final Supplier<NonBlockingTask> generator;
+  private final TicketedExecutor<BlockingTask> executor;
+  private final Consumer<BlockingTask> consumer;
+  private final Producer<BlockingTask> producer;;
+  private final Supplier<BlockingTask> generator;
   @Getter
   @Setter
   private RunnerState runnerState = ON;
@@ -39,12 +39,18 @@ public class MultiThreadedRunner implements Runner<NonBlockingTask> {
 
   private final Integer threadCount;
 
-  public MultiThreadedRunner(TaskFactory taskFactory, @Value("${THREADS}") Integer threadCount) {
+  public MultiThreadedRunner(TaskFactory taskFactory, @Value("${THREADS}") Integer threadCount,  @Value("${BLOCKING}") String BlockingTaskType) {
     this.threadCount = threadCount;
     executor = new TicketedExecutor<>(newScheduledThreadPool(threadCount), threadCount * 10);
     timer = DemoMetrics.getTimer("threaded");
     consumer = new Consumer<>(executor);
-    generator = () -> taskFactory.getIdealisticTask(executor);
+    generator = () -> {
+      if (BlockingTaskType.equals("ideal")) {
+        return taskFactory.getIdealisticTask(executor);
+      } else {
+        return taskFactory.getRealisticTask();
+      }
+    };
     producer = new Producer<>("threaded", generator, executor);
   }
 

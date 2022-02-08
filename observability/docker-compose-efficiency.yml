@@ -24,20 +24,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
   multi-1:
     image: blocking:1.0-SNAPSHOT
@@ -45,20 +45,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
   multi-2:
     image: blocking:1.0-SNAPSHOT
@@ -66,20 +66,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1 # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
 
   multi-3:
@@ -88,20 +88,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1 # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
   multi-4:
     image: blocking:1.0-SNAPSHOT
@@ -109,20 +109,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1 # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 4
+          cpus: 1
 
   multi-5:
     image: blocking:1.0-SNAPSHOT
@@ -130,20 +130,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-6:
     image: blocking:1.0-SNAPSHOT
@@ -151,20 +151,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
 
   multi-7:
@@ -173,20 +173,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-8:
     image: blocking:1.0-SNAPSHOT
@@ -194,20 +194,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-9:
     image: blocking:1.0-SNAPSHOT
@@ -215,20 +215,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-10:
     image: blocking:1.0-SNAPSHOT
@@ -236,20 +236,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-11:
     image: blocking:1.0-SNAPSHOT
@@ -257,20 +257,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-12:
     image: blocking:1.0-SNAPSHOT
@@ -278,20 +278,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-13:
     image: blocking:1.0-SNAPSHOT
@@ -299,20 +299,20 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1
 
   multi-14:
     image: blocking:1.0-SNAPSHOT
@@ -320,17 +320,17 @@ services:
     environment:
       BLOCKING: "ideal"
       # IO blocking is in units of Millis
-      IO_MAX_BLOCK: 2 # 10 millis
+      IO_MAX_BLOCK: 100 # 10 millis
       IO_MIN_BLOCK: 1  # 1 milli
       # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 100 # 2.5 millis
+      CPU_MAX_BLOCK: 20 # 2.5 millis
       CPU_MIN_BLOCK: 1  # .75 milli
 
       THREADING: "multi"
-      THREADS: 250
+      THREADS: 25
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 3
+          cpus: 1

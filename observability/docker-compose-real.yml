@@ -18,24 +18,25 @@ services:
     ports:
       - '3000:3000'
 
-  blocking-real:
-    image: blocking:1.0-SNAPSHOT
-    container_name: observability-blocking-real
-    environment:
-      BLOCKING: "real"
-      IO_MAX_BLOCK: 100
-      IO_MIN_BLOCK: 10
-      # CPU blocking is in units of Micros
-      CPU_MAX_BLOCK: 10000 # 10 millis
-      CPU_MIN_BLOCK: 1000  # 1 milli
-
-      THREADING: "single"
-    expose:
-      - 8080
-    deploy:
-      resources:
-        limits:
-          cpus: 1
+#  blocking-real:
+#    image: blocking:1.0-SNAPSHOT
+#    container_name: observability-blocking-real
+#    environment:
+#      BLOCKING: "real"
+#      IO_MAX_BLOCK: 100
+#      IO_MIN_BLOCK: 10
+#      # CPU blocking is in units of Micros
+#      CPU_MAX_BLOCK: 10000 # 10 millis
+#      CPU_MIN_BLOCK: 1000  # 1 milli
+#
+#      THREADING: "multi"
+#      THREADS: 40
+#    expose:
+#      - 8080
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: 1
 
   ideal-single:
     image: blocking:1.0-SNAPSHOT
@@ -49,10 +50,11 @@ services:
       CPU_MAX_BLOCK: 10000 # 10 millis
       CPU_MIN_BLOCK: 1000  # 1 milli
 
-      THREADING: "nonblock"
+      THREADING: "multi"
+      THREADS: 75
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: 3

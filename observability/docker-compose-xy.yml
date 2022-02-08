@@ -31,13 +31,13 @@ services:
       CPU_MIN_BLOCK: 1000  # 1 milli
 
       THREADING: "multi"
-      THREADS: 20
+      THREADS: 75
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: 3
 
   multi-1:
     image: blocking:1.0-SNAPSHOT
@@ -52,13 +52,13 @@ services:
       CPU_MIN_BLOCK: 1000  # 1 milli
 
       THREADING: "multi"
-      THREADS: 20
+      THREADS: 75
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: 3
 
   multi-2:
     image: blocking:1.0-SNAPSHOT
@@ -73,10 +73,10 @@ services:
       CPU_MIN_BLOCK: 1000  # 1 milli
 
       THREADING: "multi"
-      THREADS: 20
+      THREADS: 75
     expose:
       - 8080
     deploy:
       resources:
         limits:
-          cpus: 1
+          cpus: 3

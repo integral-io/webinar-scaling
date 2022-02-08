@@ -1,6 +1,6 @@
 package io.integral.webinar.blocking.runner.service;
 
-import io.integral.webinar.blocking.NonBlockingTask;
+import io.integral.webinar.blocking.BlockingTask;
 import io.integral.webinar.blocking.Runner;
 import io.integral.webinar.blocking.observability.DemoMetrics;
 import io.integral.webinar.blocking.runner.RunnerState;
@@ -15,7 +15,7 @@ import static io.integral.webinar.blocking.runner.RunnerState.OFF;
 import static io.integral.webinar.blocking.runner.RunnerState.ON;
 
 @Slf4j
-public class Producer<T extends NonBlockingTask> implements Runner<T> {
+public class Producer<T extends BlockingTask> implements Runner<T> {
 
   private final Timer timer;
   private final TicketedExecutor<T> queue;
